@@ -4,9 +4,7 @@
 
 - This Python script demonstrates an NTP amplification denial-of-service (DoS) attack. It uses a list of NTP servers to flood a specified target with NTP response packets. This can be used for educational purposes to understand the mechanics of NTP amplification attacks.
 
-> **Warning:**
-
-- This script should only be used in a controlled environment with explicit permission from the target. Unauthorized use of this script can lead to legal consequences.
+> **Warning:**This script should only be used in a controlled environment with explicit permission from the target. Unauthorized use of this script can lead to legal consequences.
 
 ## Requirements
 
