@@ -6,6 +6,9 @@
 
 > **Warning:** This script should only be used in a controlled environment with explicit permission from the target. Unauthorized use of this script can lead to legal consequences.
 
+## What is an NTP DoS Attack?
+- An NTP DoS attack floods a target with traffic by tricking time servers into sending massive responses to the victim, causing slowdowns or crashes.
+  
 ## Requirements
 
 - Python 3.x
